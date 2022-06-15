@@ -36,6 +36,13 @@ $Giovanni->setPaymentMethod(new CreditCard(12674321, "03/21", 129));
 //Prodotti scelti dall'utente
 /*$Giovanni*/$Michele->addToCart($dogBone);
 /*$Giovanni*/$Michele->addToCart($catToy);
+$catToy->disponibile = false;
+try {
+  $Michele->checkProductCart($catToy);
+} catch (Exception $e) {
+  // Mandare messaggio d'errore
+  echo "E' avvenuto un errore inaspettato";
+}
 ?>
 
 <!DOCTYPE html>
@@ -50,8 +57,7 @@ $Giovanni->setPaymentMethod(new CreditCard(12674321, "03/21", 129));
 </head>
 <body>
   <!-- stampa provvisoria -->
-  <h1 class="bg-info">Scegli qui i prodotti che fanno per te ed inizia ad acquistare! Per gli utenti registrati il 20% di sconto, cosa stai aspettando?</h1>
-  <div class="d-flex flex-wrap w-100 mt-5 px-5 text-light text-center">
+  <div class="d-flex flex-wrap w-100 mt-2 px-5 text-light text-center">
     <div class="card bg-dark mx-5 w-25 mb-1 p-2 text-center">
       <?php echo $dogFood -> printProduct(); ?>
       <button class="rounded-pill w-50 mx-auto my-2 bg-info border-info text-light">Acquista</button>

@@ -16,6 +16,13 @@ class User {
   function addToCart($_productToCart) {
     $this->cart[] = $_productToCart;
   } 
+  function checkProductCart($_product) {
+        if ($_product->disponibile) {
+            $this->cart[] = $_product;
+        } else {
+            throw new Exception("hai aggiunto al carrello un prodotto non disponibile");
+        }
+    }
 
 //Funzione per calcolare il prezzo totale
   function getTotalPrice() {
@@ -25,7 +32,7 @@ class User {
     }
     //se l'utente è registarto applicalo sconto del 20%
     if($this->registered) {
-      return number_format(($total_price / 100)*80, 2) . '  <small>20% di sconto per te che sei già registrato!<small/>';
+      return number_format(($total_price / 100)*80, 2) . '  <small>20% di sconto per te che sei già un nosto !<small/>';
     }
     //se l'utente non è registarto il prezzo resta pieno
     else return $total_price;
