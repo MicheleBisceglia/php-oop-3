@@ -16,6 +16,7 @@ require_once __DIR__ . "/user.php";
 require_once __DIR__ . "/food.php";
 require_once __DIR__ . "/toy.php";
 require_once __DIR__ . "/transport.php";
+require_once __DIR__ . "/CreditCard.php";
 
 //New product
 $dogFood = new Food("Crocchette di pollo", "4.99", "Italy", "Cani", "13/11/2022");
@@ -26,11 +27,15 @@ $transporCage = new Transport("Cuccia da trasporto", "39.99", "Germany","medium"
 $transportBag = new Transport("Borsa per trasporto", "19.99", "Germany", "large", "blu");
 
 //New User
-$Michele = new User("Michele", "Mikael@lao.it", "20/09/2023", "true");
+$Michele = new User("Michele", "Mikael@lao.it", "true");
+$Giovanni = new User("Giovanni","Gio_giu@tu.com", "false");//Utente non registrato con dati di pagamento non validi
+
+$Michele->setPaymentMethod(new CreditCard(123454321, "03/26", 219));
+$Giovanni->setPaymentMethod(new CreditCard(12674321, "03/21", 129));
 
 //Prodotti scelti dall'utente
-$Michele->addToCart($dogBone);
-$Michele->addToCart($catToy);
+/*$Giovanni*/$Michele->addToCart($dogBone);
+/*$Giovanni*/$Michele->addToCart($catToy);
 ?>
 
 <!DOCTYPE html>
@@ -46,15 +51,16 @@ $Michele->addToCart($catToy);
 <body>
   <!-- stampa provvisoria -->
   <h1 class="bg-info">Scegli qui i prodotti che fanno per te ed inizia ad acquistare! Per gli utenti registrati il 20% di sconto, cosa stai aspettando?</h1>
-  
   <div class="d-flex flex-wrap w-100 mt-5 px-5 text-light text-center">
     <div class="card bg-dark mx-5 w-25 mb-1 p-2 text-center">
       <?php echo $dogFood -> printProduct(); ?>
       <button class="rounded-pill w-50 mx-auto my-2 bg-info border-info text-light">Acquista</button>
+      <?php echo $dogFood -> printFormat(); ?>
     </div>
     <div class="card bg-dark w-25 mx-5 mb-1 p-2">
       <?php echo $catFood -> printProduct(); ?>
       <button class="rounded-pill w-50 mx-auto my-2 bg-info border-info text-light">Acquista</button>
+      <?php echo $catFood -> printFormat(); ?>
     </div>
     <div class="card bg-dark w-25 mx-5 mb-1 p-2">
       <?php echo $catToy -> printProduct(); ?>
@@ -84,7 +90,8 @@ $Michele->addToCart($catToy);
       <?php } ?>
 
       <h3>Totale: $<?php echo $Michele->getTotalPrice(); ?></h3>
-      <button class="rounded-pill w-25 mx-auto my-2 bg-dark border-white text-light">Completa l'ordine</button>
+      <?php echo $Michele->payamentMethod_result(); ?>
+      <button class="rounded-pill w-50 mx-auto my-2 bg-dark border-white text-light">Completa l'ordine</button>
     </div>
   </div>
 </body>
