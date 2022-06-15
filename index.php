@@ -33,7 +33,7 @@ $Giovanni = new User("Giovanni","Gio_giu@tu.com", "false");//Utente non registra
 $Michele->setPaymentMethod(new CreditCard(123454321, "03/26", 219));
 $Giovanni->setPaymentMethod(new CreditCard(12674321, "03/21", 129));
 
-//Prodotti scelti dall'utente
+//Prodotti scelti dall'utente e aggiunti al carrello
 /*$Giovanni*/$Michele->addToCart($dogBone);
 /*$Giovanni*/$Michele->addToCart($catToy);
 $catToy->disponibile = false;

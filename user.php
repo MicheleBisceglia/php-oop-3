@@ -16,6 +16,7 @@ class User {
   function addToCart($_productToCart) {
     $this->cart[] = $_productToCart;
   } 
+  //controllo se i prodotti sono disponibili
   function checkProductCart($_product) {
         if ($_product->disponibile) {
             $this->cart[] = $_product;
